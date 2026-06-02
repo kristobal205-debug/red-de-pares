@@ -1,0 +1,118 @@
+/* ═══════════════════════════════════════════
+   mobile.css — Ajustes móviles Red de Pares
+═══════════════════════════════════════════ */
+
+/* Estilos de respuesta móvil */
+@media (max-width: 640px) {
+  #app-wrapper {
+    max-width: 100%;
+  }
+
+  .body-scroll {
+    padding: 16px 12px;
+    padding-bottom: 100px;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .hero-card {
+    padding: 20px 16px;
+    margin-bottom: 16px;
+  }
+
+  .hero-greeting {
+    font-size: 24px;
+  }
+
+  .menu-card {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .chat-bubble {
+    max-width: 85%;
+  }
+
+  .scale-row {
+    gap: 6px;
+  }
+
+  .yn-row {
+    gap: 10px;
+  }
+
+  .topbar {
+    padding: 12px 14px;
+    min-height: 56px;
+  }
+
+  .topbar-title {
+    font-size: 16px;
+  }
+
+  .form-input,
+  .chat-input,
+  .btn-primary {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .body-scroll {
+    padding: 12px 8px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .stat-num {
+    font-size: 24px;
+  }
+
+  .menu-title {
+    font-size: 13px;
+  }
+
+  .menu-sub {
+    font-size: 11px;
+  }
+
+  .chat-bubble {
+    max-width: 90%;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .peer-name {
+    font-size: 13px;
+  }
+}
+
+/* Prevenir zoom en inputs */
+input, select, textarea, button {
+  font-size: 16px !important;
+}
+
+/* Touch optimizations */
+.btn-primary,
+.btn-secondary,
+.menu-card,
+.peer-card,
+.resource-item {
+  min-height: 48px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
