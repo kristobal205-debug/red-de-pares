@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#C8111A" />
+  <meta name="description" content="Red de Pares - Programa de Acompañamiento Emocional INACAP Antofagasta" />
+  <title>Red de Pares · INACAP Antofagasta</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/mobile.css" />
+
+  <!-- Iconos Tabler -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       LOGIN SCREEN
+  ══════════════════════════════════════ -->
+  <div id="screen-login" class="screen active">
+    <div class="login-hero">
+      <div class="login-logo">
+        <span class="logo-square"></span>
+        <span class="logo-text">nacap</span>
+      </div>
+      <h1 class="login-title">Red de Pares</h1>
+      <p class="login-sub">Programa de Acompañamiento Emocional<br>INACAP Antofagasta</p>
+    </div>
+
+    <div class="login-form">
+      <div class="form-group">
+        <label class="form-label" for="inp-rut">RUT Estudiante</label>
+        <input id="inp-rut" class="form-input" type="text" placeholder="12.345.678-9" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="inp-pass">Contraseña</label>
+        <input id="inp-pass" class="form-input" type="password" placeholder="••••••••" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="sel-rol">Ingresar como</label>
+        <select id="sel-rol" class="form-input form-select">
+          <option value="acompanante">Acompañante</option>
+          <option value="estudiante">Estudiante</option>
+          <option value="psicologo">Psicólogo</option>
+        </select>
+      </div>
+      <button class="btn-primary" onclick="App.login()">
+        <i class="ti ti-login"></i> Ingresar
+      </button>
+      <p class="login-footer">¿Problemas para ingresar? Contacta a tu coordinador de carrera.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       INICIO
+  ══════════════════════════════════════ -->
+  <div id="screen-home" class="screen">
+    <div class="topbar">
+      <span class="topbar-title">Red de Pares</span>
+      <button class="icon-btn" onclick="App.logout()" title="Cerrar sesión">
+        <i class="ti ti-logout"></i>
+      </button>
+    </div>
+
+    <div class="body-scroll">
+      <div class="hero-card">
+        <p class="hero-greeting" id="hero-greeting">Hola 👋</p>
+        <p class="hero-sub" id="hero-sub">Cargando información...</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-num" id="stat-sesiones">0</span>
+          <span class="stat-label">Sesiones este mes</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="stat-pares">0</span>
+          <span class="stat-label">Pares acompañados</span>
+        </div>
+      </div>
+
+      <p class="section-label">Acciones rápidas</p>
+
+      <div class="menu-card" onclick="App.showScreen('screen-pares')">
+        <div class="menu-icon red"><i class="ti ti-users"></i></div>
+        <div class="menu-info">
+          <span class="menu-title">Mis pares asignados</span>
+          <span class="menu-sub" id="label-pares">Cargando...</span>
+        </div>
+        <i class="ti ti-chevron-right menu-arrow"></i>
+      </div>
+
+      <div class="menu-card" onclick="App.showScreen('screen-formulario')">
+        <div class="menu-icon green"><i class="ti ti-clipboard-list"></i></div>
+        <div class="menu-info">
+          <span class="menu-title">Formulario de sesión</span>
+          <span class="menu-sub">Retroalimentación anónima</span>
+        </div>
+        <i class="ti ti-chevron-right menu-arrow"></i>
+      </div>
+
+      <div class="menu-card" onclick="App.showScreen('screen-guia')">
+        <div class="menu-icon blue"><i class="ti ti-book"></i></div>
+        <div class="menu-info">
+          <span class="menu-title">Guía de preguntas</span>
+          <span class="menu-sub">8 preguntas para la sesión</span>
+        </div>
+        <i class="ti ti-chevron-right menu-arrow"></i>
+      </div>
+
+      <div class="menu-card" onclick="App.showScreen('screen-recursos')">
+        <div class="menu-icon amber"><i class="ti ti-heart"></i></div>
+        <div class="menu-info">
+          <span class="menu-title">Recursos de bienestar</span>
+          <span class="menu-sub">Psicólogo, técnicas y crisis</span>
+        </div>
+        <i class="ti ti-chevron-right menu-arrow"></i>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-home"></i><span>Inicio</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-pares')">
+        <i class="ti ti-users"></i><span>Mis pares</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-formulario')">
+        <i class="ti ti-clipboard-list"></i><span>Formulario</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-recursos')">
+        <i class="ti ti-heart"></i><span>Recursos</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MIS PARES
+  ══════════════════════════════════════ -->
+  <div id="screen-pares" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-arrow-left"></i>
+      </button>
+      <span class="topbar-title">Mis pares</span>
+      <span style="width:36px"></span>
+    </div>
+
+    <div class="body-scroll">
+      <div class="tab-bar">
+        <button class="tab active" onclick="Pares.filter('todos', this)">Todos</button>
+        <button class="tab" onclick="Pares.filter('pendiente', this)">Pendiente</button>
+        <button class="tab" onclick="Pares.filter('ok', this)">Al día</button>
+        <button class="tab" onclick="Pares.filter('alerta', this)">Alerta</button>
+      </div>
+      <div id="lista-pares"></div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-home"></i><span>Inicio</span>
+      </button>
+      <button class="nav-item active" onclick="App.showScreen('screen-pares')">
+        <i class="ti ti-users"></i><span>Mis pares</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-formulario')">
+        <i class="ti ti-clipboard-list"></i><span>Formulario</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-recursos')">
+        <i class="ti ti-heart"></i><span>Recursos</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       CHAT
+  ══════════════════════════════════════ -->
+  <div id="screen-chat" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" onclick="App.showScreen('screen-pares')">
+        <i class="ti ti-arrow-left"></i>
+      </button>
+      <span class="topbar-title" id="chat-title">Chat</span>
+      <button class="icon-btn" onclick="App.showScreen('screen-guia')" title="Ver guía">
+        <i class="ti ti-book"></i>
+      </button>
+    </div>
+
+    <div class="chat-info-bar">
+      <span id="chat-info-badge" class="badge blue">Cargando...</span>
+    </div>
+
+    <div id="chat-messages" class="chat-messages"></div>
+
+    <div class="chat-input-bar">
+      <input id="chat-input" class="chat-input" type="text" placeholder="Escribe un mensaje..." />
+      <button class="chat-send" onclick="Chat.send()">
+        <i class="ti ti-send"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       GUÍA DE PREGUNTAS
+  ══════════════════════════════════════ -->
+  <div id="screen-guia" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-arrow-left"></i>
+      </button>
+      <span class="topbar-title">Guía de preguntas</span>
+      <span style="width:36px"></span>
+    </div>
+
+    <div class="body-scroll">
+      <div class="alert-box blue">
+        <i class="ti ti-info-circle"></i>
+        Usa estas preguntas de forma natural, como una conversación. No es necesario hacerlas todas ni en orden.
+      </div>
+
+      <div id="lista-preguntas"></div>
+
+      <div class="alert-box green" style="margin-top:8px">
+        <i class="ti ti-shield-check"></i>
+        <strong>Recuerda:</strong> Si un compañero menciona algo que te preocupa, no estás solo. Contacta al psicólogo institucional de inmediato.
+        <button class="btn-small" onclick="App.showScreen('screen-recursos')" style="margin-top:8px">
+          <i class="ti ti-phone"></i> Contactar psicólogo
+        </button>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-home"></i><span>Inicio</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-pares')">
+        <i class="ti ti-users"></i><span>Mis pares</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-formulario')">
+        <i class="ti ti-clipboard-list"></i><span>Formulario</span>
+      </button>
+      <button class="nav-item active" onclick="App.showScreen('screen-recursos')">
+        <i class="ti ti-heart"></i><span>Recursos</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       FORMULARIO
+  ══════════════════════════════════════ -->
+  <div id="screen-formulario" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-arrow-left"></i>
+      </button>
+      <span class="topbar-title">Retroalimentación</span>
+      <span style="width:36px"></span>
+    </div>
+
+    <div class="body-scroll" id="form-container">
+      <!-- Renderizado por formulario.js -->
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ÉXITO FORMULARIO
+  ══════════════════════════════════════ -->
+  <div id="screen-exito" class="screen">
+    <div class="body-scroll success-screen">
+      <div class="success-circle">
+        <i class="ti ti-check"></i>
+      </div>
+      <h2 class="success-title">¡Gracias por responder!</h2>
+      <p class="success-sub">Tu retroalimentación ayuda a mejorar el programa Red de Pares para todos los estudiantes de INACAP Antofagasta.</p>
+      <div class="stat-grid" style="margin-top:24px">
+        <div class="stat-card">
+          <span class="stat-num" id="exito-confianza">4.3</span>
+          <span class="stat-label">Confianza promedio</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" id="exito-sesiones">3</span>
+          <span class="stat-label">Sesiones completadas</span>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="App.showScreen('screen-home')" style="margin-top:24px">
+        <i class="ti ti-home"></i> Volver al inicio
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       RECURSOS DE BIENESTAR
+  ══════════════════════════════════════ -->
+  <div id="screen-recursos" class="screen">
+    <div class="topbar">
+      <button class="icon-btn" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-arrow-left"></i>
+      </button>
+      <span class="topbar-title">Recursos de bienestar</span>
+      <span style="width:36px"></span>
+    </div>
+
+    <div class="body-scroll">
+      <p class="section-label">Contacto directo</p>
+
+      <div class="resource-card red">
+        <div class="resource-header">
+          <div class="menu-icon red"><i class="ti ti-stethoscope"></i></div>
+          <div>
+            <p class="resource-title">Psicólogo institucional</p>
+            <p class="resource-sub">Disponible lun-vie · Respuesta en menos de 24 hrs</p>
+          </div>
+        </div>
+        <a href="mailto:psicologo@inacap.cl" class="btn-primary" style="display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none">
+          <i class="ti ti-mail"></i> Enviar mensaje
+        </a>
+      </div>
+
+      <p class="section-label">Si es urgente</p>
+      <div class="resource-card urgent">
+        <div class="resource-header">
+          <div class="menu-icon red"><i class="ti ti-phone-call"></i></div>
+          <div>
+            <p class="resource-title" style="color:#A32D2D">Línea de crisis 24/7</p>
+            <p class="resource-sub">Fono Salud Mental: 600 360 7777</p>
+          </div>
+        </div>
+        <a href="tel:6003607777" class="btn-danger">
+          <i class="ti ti-phone"></i> Llamar ahora
+        </a>
+      </div>
+
+      <p class="section-label">Técnicas de autocuidado</p>
+
+      <div id="lista-recursos"></div>
+
+      <p class="section-label">Plataforma oficial</p>
+      <a href="https://rsdue.uestatales.cl" target="_blank" class="menu-card" style="text-decoration:none">
+        <div class="menu-icon blue"><i class="ti ti-external-link"></i></div>
+        <div class="menu-info">
+          <span class="menu-title">Aquí Contigo — RSDUE</span>
+          <span class="menu-sub">Plataforma salud mental universidades del Estado</span>
+        </div>
+        <i class="ti ti-chevron-right menu-arrow"></i>
+      </a>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="App.showScreen('screen-home')">
+        <i class="ti ti-home"></i><span>Inicio</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-pares')">
+        <i class="ti ti-users"></i><span>Mis pares</span>
+      </button>
+      <button class="nav-item" onclick="App.showScreen('screen-formulario')">
+        <i class="ti ti-clipboard-list"></i><span>Formulario</span>
+      </button>
+      <button class="nav-item active">
+        <i class="ti ti-heart"></i><span>Recursos</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- JS -->
+  <script src="db/datos.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/pares.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/formulario.js"></script>
+  <script src="js/recursos.js"></script>
+  <script src="js/guia.js"></script>
+</body>
+</html>

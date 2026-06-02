@@ -1,0 +1,274 @@
+/* ═══════════════════════════════════════════
+   main.css — Estilos globales Red de Pares
+   INACAP Antofagasta · 2026
+═══════════════════════════════════════════ */
+
+/* ── Variables ── */
+:root {
+  --red:         #C8111A;
+  --red-dark:    #8B0D12;
+  --red-light:   #FDECEA;
+  --green:       #2E7D32;
+  --green-light: #EAF3DE;
+  --blue:        #0C447C;
+  --blue-light:  #E6F1FB;
+  --amber:       #633806;
+  --amber-light: #FAEEDA;
+  --dark:        #0D1B2A;
+  --mid:         #1B2A3B;
+  --white:       #FFFFFF;
+  --gray-100:    #F5F5F5;
+  --gray-200:    #EEEEEE;
+  --gray-400:    #BDBDBD;
+  --gray-600:    #757575;
+  --gray-800:    #424242;
+  --text-primary:   #1A1A1A;
+  --text-secondary: #616161;
+  --border:      #E0E0E0;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --shadow-sm:   0 1px 4px rgba(0,0,0,.10);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.12);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  background: var(--gray-100);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── App wrapper ── */
+#app-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Screens ── */
+.screen {
+  display: none;
+  flex-direction: column;
+  height: 100vh;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  background: var(--gray-100);
+  animation: fadeIn .2s ease;
+}
+.screen.active { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Topbar ── */
+.topbar {
+  background: var(--red);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  min-height: 54px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+
+.topbar-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: 20px;
+  transition: background .15s;
+}
+.icon-btn:hover { background: rgba(255,255,255,.15); }
+
+/* ── Body scroll ── */
+.body-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: 80px;
+}
+
+/* ── Bottom nav ── */
+.bottom-nav {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  display: flex;
+  padding: 8px 0 max(12px, env(safe-area-inset-bottom));
+  z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0,0,0,.07);
+}
+
+.nav-item {
+  flex: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--gray-600);
+  font-size: 11px;
+  font-family: inherit;
+  transition: color .15s;
+}
+.nav-item i { font-size: 22px; }
+.nav-item.active { color: var(--red); }
+.nav-item:hover { color: var(--red); }
+
+/* ── Section label ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin: 16px 0 8px;
+}
+.section-label:first-child { margin-top: 0; }
+
+/* ── Badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge.red    { background: var(--red-light);   color: var(--red-dark); }
+.badge.green  { background: var(--green-light);  color: var(--green); }
+.badge.blue   { background: var(--blue-light);   color: var(--blue); }
+.badge.amber  { background: var(--amber-light);  color: var(--amber); }
+
+/* ── Buttons ── */
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background .15s, transform .1s;
+}
+.btn-primary:hover  { background: var(--red-dark); }
+.btn-primary:active { transform: scale(.98); }
+
+.btn-secondary {
+  width: 100%;
+  padding: 12px;
+  background: var(--white);
+  color: var(--red);
+  border: 1.5px solid var(--red);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition: background .15s;
+}
+.btn-secondary:hover { background: var(--red-light); }
+
+.btn-danger {
+  width: 100%;
+  padding: 12px;
+  background: var(--red-light);
+  color: var(--red);
+  border: 1.5px solid var(--red);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.btn-small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--white);
+  color: var(--green);
+  border: 1.5px solid var(--green);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ── Alert box ── */
+.alert-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.alert-box i { font-size: 18px; }
+.alert-box.blue  { background: var(--blue-light);  color: var(--blue); }
+.alert-box.green { background: var(--green-light); color: var(--green); }
+.alert-box.red   { background: var(--red-light);   color: var(--red-dark); }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gray-400); border-radius: 4px; }
